@@ -30,6 +30,9 @@
 #include <map>
 #include <iostream>
 #include <scv.h>
+
+#include "tlm.h"
+#include "tlm_utils/peq_with_get.h"
 #include "hpdcache_test_defs.h"
 #include "mem_model.h"
 #include "logger.h"
@@ -115,10 +118,10 @@ protected:
         }
     };
 
-    sc_fifo<hpdcache_test_transaction_mem_read_resp>  read_resp_fifo;
     sc_fifo<mem_write_req_flit_t>                     write_req_fifo;
     sc_fifo<mem_write_req_data_flit_t>                write_req_data_fifo;
-    sc_fifo<hpdcache_test_transaction_mem_write_resp> write_resp_fifo;
+    tlm_utils::peq_with_get<hpdcache_test_transaction_mem_read_resp> read_resp_peq;
+    tlm_utils::peq_with_get<hpdcache_test_transaction_mem_write_resp> write_resp_peq;
 
     std::vector<segment_t> errorsegs;
     mem_model *memory_m;
@@ -140,8 +143,8 @@ protected:
 public:
 
     hpdcache_test_mem_resp_model_base(const std::string &nm) :
-            read_resp_fifo(2),
-            write_resp_fifo(2)
+            read_resp_peq("read"),
+            write_resp_peq("write")
     {
         std::string mem_model_name;
         mem_model_name = mem_model_name + "_" + nm;

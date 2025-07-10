@@ -286,7 +286,7 @@ public:
         std::cout << "Finishing the simulation..." << std::endl;
         
         #ifdef CREATE_FILE
-        instance_trace_writter()->close_file();
+        instance_trace_writter()->close_trace();
         #endif
 
 
@@ -521,7 +521,7 @@ int sc_main(int argc, char** argv)
             case 'f':
                 test.file_name = optarg;
                 #ifdef CREATE_FILE
-                instance_trace_writter()->open_file(optarg);
+                instance_trace_writter()->open_trace(optarg);
                 #endif
                 break;
             case 'e':

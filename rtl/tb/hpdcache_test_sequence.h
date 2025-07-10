@@ -223,7 +223,7 @@ public:
         transaction_ret_i.read();
           
         #ifdef CREATE_FILE
-        instance_file_writter()->write_in_file(t, &delay);
+        instance_trace_writter()->write_in_trace(t, &delay);
         #endif
 
         // release the previously used transaction object
