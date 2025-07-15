@@ -346,7 +346,6 @@ private:
             mem_resp_read_data_o.write(read_resp.data);
             mem_resp_read_last_o.write(read_resp.last);
             do wait(); while (!mem_resp_read_ready_i.read());
-            delete tmp;
             mem_resp_read_valid_o.write(false);
         }
     }
@@ -370,7 +369,6 @@ private:
             mem_resp_write_id_o.write(resp.id);
             do wait(); while (!mem_resp_write_ready_i.read());
             mem_resp_write_valid_o.write(false);
-            delete tmp;
         }
     }
 
